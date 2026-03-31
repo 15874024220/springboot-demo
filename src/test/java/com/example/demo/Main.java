@@ -1,14 +1,14 @@
 package com.example.demo;
 
-import com.alibaba.ttl.TransmittableThreadLocal;
-
-import java.io.*;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

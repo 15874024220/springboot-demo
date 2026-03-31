@@ -9,20 +9,40 @@ spring:
 
   # 数据源配置
   datasource:
-    url: jdbc:mysql://localhost:3306/demo_db?useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
+    url: jdbc:mysql://localhost:3306/production_db_test?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf-8
+    username: admin_user
+    password: Admin@Password2024!
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接池配置（必须）
+#    hikari:
+#      maximum-pool-size: 10
+#      minimum-idle: 5
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      max-lifetime: 1800000
+
+  # 排除不需要的自动配置
+  autoconfigure:
+    exclude:
+      # 排除 JPA
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      # 排除 RabbitMQ
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+      # 排除 Redisson（如果不需要）
+#      - org.redisson.spring.starter.RedissonAutoConfigurationV2
+      # 排除 Spring Security
+#      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
   # JPA 配置
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        format_sql: true
 
   # Redis 配置
   data:
@@ -31,6 +51,68 @@ spring:
       timeout: 5000ms
       port: 6379
       host: localhost
+#      password: YourStrongP@ssw0rd2024!@
+
+# Redisson 配置
+#redisson:
+#  single-server-config:
+#    address: "redis://localhost:6379"
+#    connection-pool-size: 64
+#    connection-minimum-idle-size: 10
+#    connect-timeout: 10000
+#    timeout: 3000
+#    retry-attempts: 3
+#    retry-interval: 1500
+
+# MyBatis-Plus配置
+mybatis-plus:
+  # 实体类包路径（用于别名）
+  type-aliases-package: com.example.demo.entity
+  # MyBatis的XML文件位置（如果要使用XML方式）
+  # Mapper XML文件位置（如果没有XML文件，可以不配置或注释掉）
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/**/mapper/*.xml
+  # 类型处理器包路径
+  type-handlers-package: com.example.demo.handler
+  # 配置项
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启二级缓存
+    cache-enabled: true
+    # 懒加载
+    lazy-loading-enabled: true
+    # 积极加载
+    aggressive-lazy-loading: false
+    # 自动映射策略
+    auto-mapping-behavior: full
+    # 允许JDBC生成主键
+    use-generated-keys: true
+    # 默认执行器类型（SIMPLE, REUSE, BATCH）
+    default-executor-type: reuse
+    # 超时时间
+    default-statement-timeout: 30
+  # MyBatis-Plus特有的全局配置
+  global-config:
+    # 是否控制台打印banner
+    banner: false
+    # 数据库配置
+    db-config:
+      # 主键类型
+      id-type: auto
+      # 表名下划线转换
+      table-underline: true
+      # 逻辑删除
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      # 插入策略
+#      insert-strategy: not_null
+#      # 更新策略
+#      update-strategy: not_null
 
 # 自定义配置
 app:
@@ -42,5 +124,8 @@ logging:
   level:
     root: INFO
     com.example: DEBUG
+    com.baomidou: DEBUG
+    com.example.demo.mapper: DEBUG
+    org.apache.ibatis: DEBUG
   file:
     name: logs/application.log
