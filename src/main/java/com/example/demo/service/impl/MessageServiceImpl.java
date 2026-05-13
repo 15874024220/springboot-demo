@@ -16,7 +16,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 
     /**
      * 当前类继承（extends ServiceImpl<MessageMapper, Message>）了ServiceImpl，
-     * ServiceImpl中已经存在了 MessageMapper 这个类，所以不需要再@Autowired进行注入了
+     * ServiceImpl中已经存在了 MessageMapper 这个类，所以不需要再@Autowired进行注入了，可以直接用baseMapper来代替
      */
     @Autowired
     private MessageMapper messageMapper;
@@ -29,7 +29,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
             msg.setContent(message);
             msg.setType(1); // 1-私聊消息
             msg.setCreateTime(LocalDateTime.now());
-
+//            baseMapper.insert(msg);
             messageMapper.insert(msg);
             log.info("保存用户[{}]的消息成功", userId);
         } catch (Exception e) {
