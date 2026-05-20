@@ -13,5 +13,11 @@
         where last_name = #{lastName}
     </select>
 
+    <select id="selectByCustomCondition" resultType="com.example.demo.entity.Employee">
+        SELECT * FROM tbl_employee
+        WHERE age BETWEEN #{minAge} AND #{maxAge}
+          AND gender = #{gender}
+        ORDER BY age DESC
+    </select>
 
 </mapper>

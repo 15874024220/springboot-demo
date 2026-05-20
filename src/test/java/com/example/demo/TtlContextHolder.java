@@ -6,7 +6,6 @@ import com.alibaba.ttl.threadpool.TtlExecutors;
 import java.util.concurrent.*;
 
 public class TtlContextHolder {
-//    private static final Logger log = LoggerFactory.getLogger(com.example.demo.TtlContextHolder.class);
 
     // 1. 使用 static final 确保 TTL 实例不被重复创建，防止内存泄漏
     // 重写 copy 方法（可选）：如果是引用类型，建议实现深拷贝

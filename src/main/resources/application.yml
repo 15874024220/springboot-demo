@@ -20,7 +20,7 @@ spring:
 
   # 数据源配置
   datasource:
-    url: jdbc:mysql://localhost:3306/production_db_test?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/production_db_test?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
     username: admin_user
     password: Admin@Password2024!
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -121,7 +121,7 @@ mybatis-plus:
     # 数据库配置
     db-config:
       # 主键类型
-      id-type: auto
+#      id-type: auto
       # 表名下划线转换
       table-underline: true
       # 逻辑删除

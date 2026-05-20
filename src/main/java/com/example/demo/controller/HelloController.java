@@ -1,16 +1,20 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Message;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(tags = "Hello 控制器")
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
 
+    @ApiOperation(value = "hello", notes = "hello 数据返回")
     @GetMapping
     public Map<String, Object> hello() {
         Map<String, Object> response = new HashMap<>();
